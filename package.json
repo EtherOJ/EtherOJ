@@ -1,0 +1,32 @@
+{
+  "name": "covellite-frontend",
+  "version": "1.0.0",
+  "description": "Frontend of the Project Covellite.",
+  "author": "Xiaodai Dai",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
+  },
+  "dependencies": {
+    "@nuxtjs/auth": "^4.9.1",
+    "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/pwa": "^3.0.0-0",
+    "babel-runtime": "^6.26.0",
+    "dotenv": "^8.2.0",
+    "nuxt": "^2.0.0",
+    "vue-markdown": "^2.2.4",
+    "yaml": "^1.9.2"
+  },
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "^1.0.0",
+    "@nuxtjs/eslint-config": "^2.0.0",
+    "@nuxtjs/eslint-module": "^1.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^6.1.0",
+    "eslint-plugin-nuxt": ">=0.4.2"
+  }
+}

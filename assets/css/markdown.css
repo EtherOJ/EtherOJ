@@ -1,0 +1,23 @@
+.markdown h1 {
+    @apply text-4xl;
+}
+
+.markdown h2 {
+    @apply text-3xl;
+}
+
+.markdown h3 {
+    @apply text-2xl;
+}
+
+.markdown h4 {
+    @apply text-xl;
+}
+
+.markdown h5 {
+    @apply text-lg;
+}
+
+.markdown pre {
+    @apply bg-gray-300;
+}

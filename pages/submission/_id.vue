@@ -33,7 +33,11 @@
       <Card name="RESULT">
         <details v-for="e in parseAnnotations()" :key="e.key">
           <summary>{{ e.summary }}</summary>
-          {{ e }}
+          <template v-for="(v, k) in e">
+            <p v-if="k !== 'key' && k !== 'summary'" :key="k">
+              <b>{{ pascalCase(k) }}</b> {{ v }}
+            </p>
+          </template>
         </details>
       </Card>
     </template>
@@ -123,13 +127,21 @@ export default {
             ...JSON.parse(dats[1])
           })
         }
+        return ret
       } catch (e) {
         return [{
           key: 'oops',
-          summary: 'Cannot get result because failed to parse judger output',
+          summary: 'Failed to parse judger result',
           error: e
         }]
       }
+    },
+    pascalCase (str) {
+      str = str.split('_')
+      for (let i = 0; i < str.length; i++) {
+        str[i] = str[i].slice(0, 1).toUpperCase() + str[i].slice(1, str[i].length)
+      }
+      return str.join('')
     }
   }
 }

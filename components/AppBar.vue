@@ -21,6 +21,7 @@
 <style lang="postcss" scoped>
     .appbar {
         @apply bg-white fixed w-full py-4 px-8 border-b-2 text-lg;
+        z-index: 100;
     }
 
     .links a {

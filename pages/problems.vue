@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1>Problems</h1>
-    <p>Index File SHA1: {{ indexResponse.sha }}</p>
+    <p>Index File SHA1: {{ sha }}</p>
     <br>
     <table class="bg-gray-100 rounded-lg w-full">
       <tr class="bg-gray-200">
@@ -23,23 +23,17 @@
 </template>
 
 <script>
-import Base64 from '~/assets/base64'
-
-const INDEX_PATH = '/repos/pcovellite/problem/contents/index.json?ref=index'
-
 export default {
   data () {
     return {
       problems: [],
-      indexResponse: {
-        sha: 'Fetching data...'
-      }
+      sha: 'Fetching data...'
     }
   },
   async mounted () {
-    const fileInfo = await this.$axios.$get(INDEX_PATH)
-    this.indexResponse = fileInfo
-    this.problems = JSON.parse(Base64.decode(fileInfo.content))
+    await this.$store.dispatch('problems/fetch')
+    this.problems = this.$store.state.problems.problems
+    this.sha = this.$store.state.problems.sha
   }
 }
 </script>

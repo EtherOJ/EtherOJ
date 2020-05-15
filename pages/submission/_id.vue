@@ -113,16 +113,23 @@ export default {
   },
   methods: {
     parseAnnotations () {
-      const ret = []
-      for (const e of this.annotations) {
-        const dats = e.message.split('\n')
-        ret.push({
-          key: e.blob_href,
-          summary: dats[0],
-          ...JSON.parse(dats[1])
-        })
+      try {
+        const ret = []
+        for (const e of this.annotations) {
+          const dats = e.message.split('\n')
+          ret.push({
+            key: e.blob_href,
+            summary: dats[0],
+            ...JSON.parse(dats[1])
+          })
+        }
+      } catch (e) {
+        return [{
+          key: 'oops',
+          summary: 'Cannot get result because failed to parse judger output',
+          error: e
+        }]
       }
-      return ret
     }
   }
 }

@@ -31,6 +31,9 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    { src: '~/plugins/nuxt-prism', mode: 'client' },
+    { src: '~/plugins/vue-modal', mode: 'client' },
+    { src: '~/plugins/api-helper' }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -61,7 +64,8 @@ export default {
     strategies: {
       github: {
         client_id: process.env.CLIENT_ID,
-        client_secret: process.env.CLIENT_SECRET
+        client_secret: process.env.CLIENT_SECRET,
+        scope: ['public_repo']
       }
     }
   },
@@ -76,6 +80,14 @@ export default {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
+    },
+    babel: {
+      plugins: [
+        ['prismjs', {
+          languages: ['cpp'],
+          css: true
+        }]
+      ]
     }
   }
 }

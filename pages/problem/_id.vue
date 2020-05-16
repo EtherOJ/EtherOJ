@@ -3,7 +3,7 @@
     <template v-if="!error">
       <h1>{{ id }} - {{ def.name }}</h1>
       <Card name="ACTIONS">
-        <nuxt-link to="/submit">
+        <nuxt-link :to="`/submit/${id}`">
           Submit
         </nuxt-link>
       </Card>

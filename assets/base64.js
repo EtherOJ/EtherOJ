@@ -4,6 +4,7 @@ const base64abc =
 export default {
 
   encode (bytes) {
+    bytes = new TextEncoder().encode(bytes)
     let result = ''
     let i
     const l = bytes.length

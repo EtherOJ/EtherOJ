@@ -15,10 +15,14 @@
     "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/pwa": "^3.0.0-0",
+    "babel-plugin-prismjs": "^2.0.1",
     "babel-runtime": "^6.26.0",
     "dotenv": "^8.2.0",
     "nuxt": "^2.0.0",
+    "prismjs": "^1.20.0",
+    "vue-js-modal": "^2.0.0-rc.3",
     "vue-markdown": "github:pcovellite/vue-markdown",
+    "vue-prism-editor": "^0.6.1",
     "yaml": "^1.9.2"
   },
   "devDependencies": {

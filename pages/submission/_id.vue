@@ -117,24 +117,25 @@ export default {
   },
   methods: {
     parseAnnotations () {
-      try {
-        const ret = []
-        for (const e of this.annotations) {
+      const ret = []
+      for (const e of this.annotations) {
+        try {
           const dats = e.message.split('\n')
           ret.push({
             key: e.blob_href,
             summary: dats[0],
             ...JSON.parse(dats[1])
           })
+        } catch (ex) {
+          ret.push({
+            key: 'oops',
+            summary: 'Failed to parse current judger result',
+            error: ex,
+            rawMessage: e.message
+          })
         }
-        return ret
-      } catch (e) {
-        return [{
-          key: 'oops',
-          summary: 'Failed to parse judger result',
-          error: e
-        }]
       }
+      return ret
     },
     pascalCase (str) {
       str = str.split('_')

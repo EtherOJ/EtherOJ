@@ -81,13 +81,6 @@ export default {
     */
     extend (config, ctx) {
     },
-    babel: {
-      plugins: [
-        ['prismjs', {
-          languages: ['cpp'],
-          css: true
-        }]
-      ]
-    }
+    babel: {}
   }
 }

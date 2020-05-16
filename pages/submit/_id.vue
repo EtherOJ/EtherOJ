@@ -8,6 +8,8 @@
         language="clike"
         :line-numbers="true"
         :code="code"
+        :emit-events="true"
+        @change="e => code = e"
       />
       <v-dialog />
     </client-only>

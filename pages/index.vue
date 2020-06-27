@@ -2,7 +2,7 @@
   <div class="container">
     <div>
       <h1 class="text-6xl">
-        Welcome to CovOJ
+        Welcome to EtherOJ
       </h1>
       <h2 class="text-3xl">
         A GitHub-Based concept OJ

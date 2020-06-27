@@ -1,6 +1,6 @@
 <template>
   <div class="appbar">
-    <a class="logo font-medium text-xl text-black">CovOJ</a>
+    <a class="logo font-medium text-xl text-black">EtherOJ</a>
     <div class="links inline mx-8">
       <nuxt-link to="/">
         Home

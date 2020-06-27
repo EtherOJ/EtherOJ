@@ -37,8 +37,8 @@ import VueMarkdown from 'vue-markdown'
 import Base64 from '~/assets/base64'
 import Card from '~/components/Card'
 
-const DEF_PATH = '/repos/pcovellite/problem/contents/problem.yml?ref='
-const DEC_PATH = '/repos/pcovellite/problem/contents/README.md?ref='
+const DEF_PATH = '/repos/EtherOJ/problems/contents/problem.yml?ref='
+const DEC_PATH = '/repos/EtherOJ/problems/contents/README.md?ref='
 
 export default {
   components: { Card, VueMarkdown },

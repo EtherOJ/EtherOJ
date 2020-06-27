@@ -12,7 +12,7 @@ function f (t, ...args) {
 // eslint-disable-next-line prefer-const
 let $axios = null
 
-const baseRepoOwner = 'pcovellite'
+const baseRepoOwner = 'EtherOJ'
 
 const submissionsSrcRepo = `${baseRepoOwner}/submissions`
 const uRepo = '/repos/{0}/{1}'

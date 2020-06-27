@@ -34,7 +34,7 @@
 <script>
 // import Base64 from '~/assets/base64'
 
-const PR = '/repos/pcovellite/submissions/pulls?state=all'
+const PR = '/repos/EtherOJ/submissions/pulls?state=all'
 
 export default {
   data () {

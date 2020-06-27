@@ -21,7 +21,7 @@
     "nuxt": "^2.0.0",
     "prismjs": "^1.20.0",
     "vue-js-modal": "^2.0.0-rc.3",
-    "vue-markdown": "github:pcovellite/vue-markdown",
+    "vue-markdown": "github:EtherOJ/vue-markdown",
     "vue-prism-editor": "^0.6.1",
     "yaml": "^1.9.2"
   },

@@ -1,6 +1,6 @@
 import Base64 from '~/assets/base64'
 
-const INDEX_PATH = '/repos/pcovellite/problem/contents/index.json?ref=index'
+const INDEX_PATH = '/repos/EtherOJ/problems/contents/index.json?ref=index'
 
 export default {
   state: () => ({

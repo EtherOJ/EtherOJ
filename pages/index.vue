@@ -17,7 +17,7 @@
         and make it better together!
       </p>
       <p>
-        <a href="https://github.com/pcovellite" target="_blank">
+        <a href="https://github.com/EtherOJ" target="_blank">
           GitHub Project Page
         </a>
       </p>

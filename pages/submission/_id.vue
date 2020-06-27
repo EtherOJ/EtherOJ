@@ -65,9 +65,9 @@
 <script>
 import Card from '~/components/Card'
 
-const PR = '/repos/pcovellite/submissions/pulls/'
-const CHECK_SUITE = '/repos/pcovellite/submissions/commits/{0}/check-runs'
-const DETAIL = '/repos/pcovellite/submissions/check-runs/{0}/annotations'
+const PR = '/repos/EtherOJ/submissions/pulls/'
+const CHECK_SUITE = '/repos/EtherOJ/submissions/commits/{0}/check-runs'
+const DETAIL = '/repos/EtherOJ/submissions/check-runs/{0}/annotations'
 
 export default {
   components: {

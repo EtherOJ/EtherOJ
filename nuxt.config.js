@@ -25,8 +25,14 @@ export default {
   ** Global CSS
   */
   css: [
-    '~/assets/css/markdown.css'
+    '~/assets/css/markdown.css',
+    '@zeit-ui/vue/dist/zeit-ui.css',
+    'vue-prism-editor/dist/VuePrismEditor.css',
+    'prismjs/themes/prism.css'
   ],
+  purgeCSS: {
+    enabled: false
+  },
   /*
   ** Plugins to load before mounting the App
   */
@@ -34,7 +40,7 @@ export default {
     { src: '~/plugins/nuxt-prism', mode: 'client' },
     { src: '~/plugins/vue-modal', mode: 'client' },
     { src: '~/plugins/api-helper' },
-    { src: '~/plugins/zeit' }
+    { src: '~/plugins/zeit', ssr: true }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -80,8 +86,5 @@ export default {
     /*
     ** You can extend webpack config here
     */
-    extend (config, ctx) {
-    },
-    babel: {}
   }
 }

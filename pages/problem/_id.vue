@@ -25,9 +25,9 @@
         />
       </Card>
     </template>
-    <h2 v-else>
-      {{ error }}
-    </h2>
+    <template v-else>
+      <Loader>{{ error }}</Loader>
+    </template>
   </div>
 </template>
 
@@ -36,12 +36,13 @@ import YAML from 'yaml'
 import VueMarkdown from 'vue-markdown'
 import Base64 from '~/assets/base64'
 import Card from '~/components/Card'
+import Loader from '~/components/Loader'
 
 const DEF_PATH = '/repos/EtherOJ/problems/contents/problem.yml?ref='
 const DEC_PATH = '/repos/EtherOJ/problems/contents/README.md?ref='
 
 export default {
-  components: { Card, VueMarkdown },
+  components: { Card, VueMarkdown, Loader },
   data () {
     return {
       id: this.$route.params.id,

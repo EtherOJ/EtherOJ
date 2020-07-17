@@ -1,13 +1,9 @@
 <template>
   <div class="container">
     <h1>Login</h1>
-    <br>
-    <div
-      class="px-5 py-3 bg-gray-800 inline-block text-white cursor-pointer"
-      @click="login()"
-    >
+    <zi-button type="primary" shadow @click="login()">
       Login via GitHub
-    </div>
+    </zi-button>
   </div>
 </template>
 

@@ -2,7 +2,6 @@
   <div class="container">
     <h1>Submit Code</h1>
     <p><b>Problem:</b> {{ id }} - {{ getProblemName(id) }}</p>
-    <br>
     <client-only>
       <prism-editor
         language="clike"
@@ -13,23 +12,18 @@
       />
       <v-dialog />
     </client-only>
-    <div
-      :class="['submitButton', isSubmitting? 'submitting' : '']"
+    <br>
+    <zi-button
+      :loading="isSubmitting && !userCancel"
+      :type="userCancel? 'abort' : 'success'"
       @click="onSubmitClick"
     >
       {{ submitStatus }}
-    </div>
+    </zi-button>
   </div>
 </template>
 
 <style lang="postcss" scoped>
-.submitButton {
-  @apply my-5 px-5 py-3 bg-gray-800 inline-block text-white cursor-pointer;
-}
-
-.submitting {
-  @apply bg-gray-400 cursor-not-allowed !important;
-}
 </style>
 
 <script>
@@ -68,7 +62,7 @@ export default {
         } else {
           this.$modal.show('dialog', {
             title: 'Repository Conflict',
-            text: "It seems that there's a same-name repo in your account. " +
+            text: "It seems that there's a same-name repo 'submissions' in your account.<br>" +
               'Please consider rename or delete that repo to continue.'
           })
           this.userCancel = true

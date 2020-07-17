@@ -17,9 +17,9 @@
         and make it better together!
       </p>
       <p>
-        <a href="https://github.com/EtherOJ" target="_blank">
+        <zi-link href="https://github.com/EtherOJ" target="_blank" color>
           GitHub Project Page
-        </a>
+        </zi-link>
       </p>
       <br>
       <template v-if="this.$auth.loggedIn">
@@ -31,10 +31,12 @@
         </p>
         <p>
           <a @click="logout()">Log out</a> or
-          <a
+          <zi-link
+            color
             href="https://github.com/settings/connections/applications"
           >
-            Manage your authorization</a>
+            Manage your authorization
+          </zi-link>
         </p>
       </template>
       <p v-else>

@@ -33,7 +33,8 @@ export default {
   plugins: [
     { src: '~/plugins/nuxt-prism', mode: 'client' },
     { src: '~/plugins/vue-modal', mode: 'client' },
-    { src: '~/plugins/api-helper' }
+    { src: '~/plugins/api-helper' },
+    { src: '~/plugins/zeit' }
   ],
   /*
   ** Nuxt.js dev-modules

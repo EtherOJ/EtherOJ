@@ -1,7 +1,7 @@
 <template>
   <div class="appbar">
     <zi-row>
-      <zi-col class="flex items-center" span="4">
+      <zi-col class="flex items-center" span="2">
         <a class="logo font-medium text-xl text-black">EtherOJ</a>
       </zi-col>
       <zi-col class="links flex items-center">
@@ -18,8 +18,22 @@
           Help
         </nuxt-link>
       </zi-col>
-      <zi-col span="4">
-        <zi-user name="Devil Placeholder" />
+      <zi-col span="3">
+        <template v-if="this.$auth.loggedIn">
+          <zi-user
+            :name="this.$auth.user.name"
+            :src="this.$auth.user.avatar_url"
+          />
+        </template>
+        <template v-else>
+          <zi-button
+            type="success"
+            size="small"
+            @click="$router.push('/login')"
+          >
+            Log In
+          </zi-button>
+        </template>
       </zi-col>
     </zi-row>
   </div>
@@ -38,6 +52,5 @@
 
 <script>
 export default {
-
 }
 </script>

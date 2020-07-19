@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1>Login</h1>
-    <zi-button type="primary" shadow @click="login()">
+    <zi-button type="primary" shadow @click="login">
       Login via GitHub
     </zi-button>
   </div>

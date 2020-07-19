@@ -14,6 +14,9 @@
         <nuxt-link to="/submissions">
           Submissions
         </nuxt-link>
+        <nuxt-link to="/tools">
+          Tools
+        </nuxt-link>
         <nuxt-link to="/help">
           Help
         </nuxt-link>

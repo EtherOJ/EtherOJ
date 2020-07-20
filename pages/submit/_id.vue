@@ -16,6 +16,7 @@
     <zi-button
       :loading="isSubmitting && !userCancel"
       :type="userCancel? 'abort' : 'success'"
+      disabled
       @click="onSubmitClick"
     >
       {{ submitStatus }}

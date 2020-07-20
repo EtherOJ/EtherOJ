@@ -1,11 +1,15 @@
 <template>
   <div class="container">
     <h1>Problems</h1>
+    <span>Problem Source: </span>
+    <zi-select size="small" value="EtherOJ Central">
+      <zi-option value="EtherOJ Central" />
+    </zi-select>
     <p>Index File SHA1: {{ sha }}</p>
     <br>
-    <table class="bg-gray-100 rounded-lg w-full">
-      <tr class="bg-gray-200">
-        <th class="w-1/5">
+    <table class="w-full">
+      <tr>
+        <th class="w-1/6">
           id
         </th>
         <th>name</th>

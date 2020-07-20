@@ -7,15 +7,11 @@
         <th>
           id
         </th>
-        <th class="w-1/12">
-          status
-        </th>
         <th>name</th>
         <th>submitter</th>
       </tr>
       <tr v-for="d in prList" :key="d.number">
         <td>{{ d.number }}</td>
-        <td>{{ d.state === 'open'? 'Judging' : "Judged" }}</td>
         <td>
           <nuxt-link :to="`/submission/${d.number}`">
             <b>{{ d.base.ref }}</b> {{ getProblemName(d.base.ref) }}

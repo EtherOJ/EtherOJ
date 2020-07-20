@@ -2,6 +2,9 @@
   <div class="container">
     <template v-if="!error">
       <h1>Submission #{{ resp.number }}</h1>
+      <zi-note type="warning">
+        This submission is not validated for results to be legal.
+      </zi-note>
       <Card name="INFO">
         <p>
           <b>Submitter:</b>
@@ -25,45 +28,46 @@
         </p>
         <p>
           <b>Status:</b>
-          <span :class="badgeClass">
-            {{ judger.conclusion === 'success'? 'Accepted' : 'Unaccepted' }}
-          </span>
+          <zi-dot :type="statusBadge">
+            {{ statusText }}
+          </zi-dot>
         </p>
       </Card>
       <Card name="RESULT">
-        <details v-for="e in parseAnnotations()" :key="e.key">
-          <summary>{{ e.summary }}</summary>
-          <template v-for="(v, k) in e">
-            <p v-if="k !== 'key' && k !== 'summary'" :key="k">
-              <b>{{ pascalCase(k) }}</b> {{ v }}
-            </p>
-          </template>
-        </details>
+        <zi-tabs>
+          <zi-tabs-item label="Result" value="parsed">
+            <p>Total {{ info.accepted }} of {{ info.total }} cases accepted.</p>
+            <zi-spacer />
+            <zi-grid :container="true" :spacing="3">
+              <zi-grid v-for="i in info.cases" :key="i.id" :xs="12">
+                <CaseTile :case-data="i" />
+              </zi-grid>
+            </zi-grid>
+          </zi-tabs-item>
+          <zi-tabs-item label="Raw Data" value="raw">
+            <client-only>
+              <prism-editor
+                language="json"
+                :line-numbers="true"
+                :readonly="true"
+                :code="annotMsg"
+              />
+            </client-only>
+          </zi-tabs-item>
+        </zi-tabs>
       </Card>
     </template>
-    <p v-else>
-      Loading...
-    </p>
+    <Loader v-else />
   </div>
 </template>
 
 <style lang="postcss" scoped>
-.result-box {
-  @apply bg-gray-400 w-32 h-32;
-}
-
-.fail {
-  @apply text-red-600;
-}
-
-.success {
-  @apply text-green-600;
-}
-
 </style>
 
 <script>
 import Card from '~/components/Card'
+import Loader from '~/components/Loader'
+import CaseTile from '~/components/CaseTile'
 
 const PR = '/repos/EtherOJ/submissions/pulls/'
 const CHECK_SUITE = '/repos/EtherOJ/submissions/commits/{0}/check-runs'
@@ -71,7 +75,7 @@ const DETAIL = '/repos/EtherOJ/submissions/check-runs/{0}/annotations'
 
 export default {
   components: {
-    Card
+    Card, Loader, CaseTile
   },
   data () {
     return {
@@ -79,7 +83,8 @@ export default {
       headSHA: null,
       resp: null,
       judger: null,
-      annotations: [],
+      annotMsg: '',
+      info: null,
       error: 'Loading...',
       ax: this.$axios.create({
         headers: {
@@ -89,8 +94,19 @@ export default {
     }
   },
   computed: {
-    badgeClass () {
-      return this.judger.conclusion === 'success' ? 'success' : 'fail'
+    statusBadge () {
+      switch (this.judger.conclusion) {
+        case 'success': return 'success'
+        case 'failure':
+        default: return 'danger'
+      }
+    },
+    statusText () {
+      switch (this.judger.conclusion) {
+        case 'success': return 'Accepted'
+        case 'failure': return 'Unaccepted'
+        default: return `Error: ${this.judger.conclusion}`
+      }
     }
   },
   async mounted () {
@@ -111,39 +127,9 @@ export default {
     this.judger = checkRuns[0]
 
     const annot = (await this.ax.get(f(DETAIL, this.judger.id))).data
-    this.annotations = annot
-
+    this.annotMsg = annot[0].message.split('\n').slice(1).join('\n')
+    this.info = JSON.parse(this.annotMsg)
     this.error = false
-  },
-  methods: {
-    parseAnnotations () {
-      const ret = []
-      for (const e of this.annotations) {
-        try {
-          const dats = e.message.split('\n')
-          ret.push({
-            key: e.blob_href,
-            summary: dats[0],
-            ...JSON.parse(dats[1])
-          })
-        } catch (ex) {
-          ret.push({
-            key: 'oops',
-            summary: 'Failed to parse current judger result',
-            error: ex,
-            rawMessage: e.message
-          })
-        }
-      }
-      return ret
-    },
-    pascalCase (str) {
-      str = str.split('_')
-      for (let i = 0; i < str.length; i++) {
-        str[i] = str[i].slice(0, 1).toUpperCase() + str[i].slice(1, str[i].length)
-      }
-      return str.join('')
-    }
   }
 }
 </script>

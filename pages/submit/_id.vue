@@ -4,7 +4,7 @@
     <p><b>Problem:</b> {{ id }} - {{ getProblemName(id) }}</p>
     <client-only>
       <prism-editor
-        language="clike"
+        language="cpp"
         :line-numbers="true"
         :code="code"
         :emit-events="true"

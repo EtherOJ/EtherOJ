@@ -4,21 +4,21 @@
       <h1>{{ id }} - {{ def.name }}</h1>
       <Card name="ACTIONS">
         <nuxt-link :to="`/submit/${id}`">
-          Submit
+          <zi-button size="small">
+            Submit
+          </zi-button>
         </nuxt-link>
       </Card>
       <Card name="META">
-        <ul class="list-none">
-          <li v-if="def.source">
-            <b>Problem Source:</b> {{ def.source }}
-          </li>
-          <li v-if="def.time_limit">
-            <b>Time Limit:</b> {{ def.time_limit }} ms
-          </li>
-          <li v-if="def.space_limit">
-            <b>Space Limit:</b> {{ def.space_limit }} MB
-          </li>
-        </ul>
+        <p v-if="def.source">
+          <b>Problem Source:</b> {{ def.source }}
+        </p>
+        <p v-if="def.time_limit">
+          <b>Time Limit:</b> {{ def.time_limit }} ms
+        </p>
+        <p v-if="def.space_limit">
+          <b>Space Limit:</b> {{ def.space_limit }} MB
+        </p>
       </Card>
       <Card name="PROBLEM">
         <vue-markdown

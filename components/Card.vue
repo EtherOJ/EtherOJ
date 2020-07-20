@@ -1,15 +1,18 @@
 <template>
-  <div class="bg-gray-100 rounded-sm p-3 my-3">
-    <div class="-m-3 px-3 py-2 bg-gray-200 rounded-t-sm text-sm">
-      <b>{{ name }}</b>
-    </div>
-    <div class="pt-6 card-inner">
+  <zi-card class="card-outer">
+    <zi-description :title="name" />
+    <div class="card-inner">
       <slot />
     </div>
-  </div>
+  </zi-card>
 </template>
 
 <style lang="postcss">
+
+.card-outer {
+  @apply my-2 !important;
+}
+
 .card-inner p {
   @apply leading-normal m-0;
 }

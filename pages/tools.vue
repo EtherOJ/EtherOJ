@@ -17,6 +17,11 @@
           Query
         </zi-button>
       </zi-collapse-item>
+      <zi-collapse-item title="Submit Problem in External Repository">
+        <nuxt-link to="/submit">
+          Submit
+        </nuxt-link>
+      </zi-collapse-item>
     </zi-collapse>
   </div>
 </template>

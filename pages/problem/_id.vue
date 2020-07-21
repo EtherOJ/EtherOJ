@@ -3,7 +3,7 @@
     <template v-if="!error">
       <h1>{{ id }} - {{ def.name }}</h1>
       <Card name="ACTIONS">
-        <nuxt-link :to="`/submit/${id}`">
+        <nuxt-link :to="{ name: 'submit', params: { repo: repo , ref: `heads/${id}` }}">
           <zi-button size="small">
             Submit
           </zi-button>
@@ -48,6 +48,7 @@ export default {
   data () {
     return {
       id: this.$route.params.id,
+      repo: 'EtherOJ/problems', // todo
       def: null,
       description: '',
       error: 'Loading...'

@@ -19,6 +19,12 @@
           </a>
         </p>
         <p>
+          <b>Name:</b>
+          <span>
+            {{ resp.title }}
+          </span>
+        </p>
+        <p>
           <b>Created:</b>
           {{ new Date(resp.created_at).toLocaleDateString() }}
           {{ new Date(resp.created_at).toLocaleTimeString() }}

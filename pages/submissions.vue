@@ -14,7 +14,7 @@
         <td>{{ d.number }}</td>
         <td>
           <nuxt-link :to="`/submission/${d.number}`">
-            <b>{{ d.base.ref }}</b> {{ getProblemName(d.base.ref) }}
+            <b>{{ d.title }}</b>
           </nuxt-link>
         </td>
         <td>

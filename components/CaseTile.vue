@@ -3,6 +3,9 @@
     <zi-description :title="`#${caseData.id}`">
       <h4>{{ ResultEnum[caseData.result] }}</h4>
       <template v-if="caseData.detail">
+        <p v-if="caseData.error_message">
+          <b>Message:</b> {{ caseData.error_message }}
+        </p>
         <p><b>Real Time Used:</b> {{ caseData.detail.real_time }} ms</p>
         <p>
           <b>Space Used:</b>
@@ -18,7 +21,7 @@
               Answer: {{ caseData.case.ansFile }}
             </template>
           </zi-tooltip>
-          <zi-tooltip class="inline-block" :delay="500">
+          <zi-tooltip class="inline-block">
             <a>Raw</a>
             <template v-slot:content>
               {{ JSON.stringify(caseData) }}
@@ -54,7 +57,8 @@ const ResultEnum = {
   2: 'Time Limit Exceeded',
   3: 'Memory Limit Exceeded',
   4: 'Runtime Error',
-  5: 'System Error'
+  5: 'System Error',
+  '#': 'Judger is still judging...'
 }
 
 export default {

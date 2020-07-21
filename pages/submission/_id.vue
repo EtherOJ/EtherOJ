@@ -2,9 +2,9 @@
   <div class="container">
     <template v-if="!error">
       <h1>Submission #{{ resp.number }}</h1>
-      <zi-note type="warning">
+      <!-- <zi-note type="warning">
         This submission is not validated for results to be legal.
-      </zi-note>
+      </zi-note> -->
       <Card name="INFO">
         <p>
           <b>Submitter:</b>
@@ -36,13 +36,21 @@
       <Card name="RESULT">
         <zi-tabs>
           <zi-tabs-item label="Result" value="parsed">
-            <p>Total {{ info.accepted }} of {{ info.total }} cases accepted.</p>
-            <zi-spacer />
-            <zi-grid :container="true" :spacing="3">
-              <zi-grid v-for="i in info.cases" :key="i.id" :xs="12">
-                <CaseTile :case-data="i" />
+            <template v-if="info.result !== 'Error'">
+              <p v-if="info.accepted">
+                Total {{ info.accepted }} of {{ info.total }} cases accepted.
+              </p>
+              <zi-spacer />
+              <zi-grid :container="true" :spacing="3">
+                <zi-grid v-for="i in info.cases" :key="i.id" :xs="12">
+                  <CaseTile :case-data="i" />
+                </zi-grid>
               </zi-grid>
-            </zi-grid>
+            </template>
+            <template v-else>
+              <p>A problem occurred while judging this submission.</p>
+              <p><b>Error {{ info.error }}</b> {{ info.error_message }} </p>
+            </template>
           </zi-tabs-item>
           <zi-tabs-item label="Raw Data" value="raw">
             <client-only>
@@ -97,6 +105,7 @@ export default {
     statusBadge () {
       switch (this.judger.conclusion) {
         case 'success': return 'success'
+        case null: return 'warning'
         case 'failure':
         default: return 'danger'
       }
@@ -105,6 +114,7 @@ export default {
       switch (this.judger.conclusion) {
         case 'success': return 'Accepted'
         case 'failure': return 'Unaccepted'
+        case null: return 'Judging'
         default: return `Error: ${this.judger.conclusion}`
       }
     }
@@ -127,8 +137,15 @@ export default {
     this.judger = checkRuns[0]
 
     const annot = (await this.ax.get(f(DETAIL, this.judger.id))).data
-    this.annotMsg = annot[0].message.split('\n').slice(1).join('\n')
-    this.info = JSON.parse(this.annotMsg)
+    if (annot.length === 0) {
+      this.annotMsg = 'No judge infomation available at this time'
+      this.info = {
+        cases: [{ id: '#', result: '#' }]
+      }
+    } else {
+      this.annotMsg = annot[0].message.split('\n').slice(1).join('\n')
+      this.info = JSON.parse(this.annotMsg)
+    }
     this.error = false
   }
 }

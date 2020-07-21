@@ -29,38 +29,44 @@ async function forkRepo (target) {
   return await this.$axios.$post(f(uForkRepo, target))
 }
 
-const uRef = '/repos/{0}/git/ref/heads/{1}'
-const uCreateRef = '/repos/{0}/git/refs'
-async function createTempBranch (user) {
-  const branchName = 'submit-' +
-    Math.abs(Math.random() * 0x7FFFFFFFF | 0).toString(16).padStart(8, '0')
-  const repoName = `${user}/submissions`
-  const masterRef = await this.$axios.$get(f(uRef, repoName, 'master'))
-  await this.$axios.$post(f(uCreateRef, repoName), {
-    ref: `refs/heads/${branchName}`,
-    sha: masterRef.object.sha
-  })
-
-  return branchName
+async function deleteRef (repoName, branch) {
+  return await this.$axios.$delete(`/repos/${repoName}/git/refs/heads/${branch}`)
 }
 
-async function deleteRef (user, branch) {
-  const repoName = `${user}/submissions`
-  return await this.$axios.$delete(f(uRef, repoName, branch))
+async function getRef (repo, ref) {
+  try {
+    const resp = await this.$axios.$get(`/repos/${repo}/git/refs/${ref}`)
+    return resp
+  } catch (e) {
+    return undefined
+  }
 }
 
-const uCreate = '/repos/{0}/{1}/contents/{2}'
-async function createFile (user, repo, branch, path, content, message = 'Submit Code') {
-  const fileInfo = await this.$axios.$put(f(uCreate, user, repo, path), {
-    message,
-    branch,
-    content: Base64.encode(content)
+async function getBranchHeadSHA (repo, branch) {
+  const resp = await this.$axios.$get(`/repos/${repo}/branches/${branch}`)
+  return resp.commit.sha
+}
+
+async function pushFilesToRef (repo, files, baseTree, ref) {
+  const tree = await this.$axios.$post(`/repos/${repo}/git/trees`, {
+    tree: files,
+    base_tree: baseTree
   })
-  return fileInfo
+  const commit = await this.$axios.$post(`/repos/${repo}/git/commits`, {
+    message: 'Submit Code',
+    tree: tree.sha,
+    parents: [baseTree]
+  })
+  const refw = await this.$axios.$post(`/repos/${repo}/git/refs`, {
+    ref,
+    sha: commit.sha
+  })
+
+  return refw
 }
 
 const uPull = '/repos/{0}/pulls'
-async function createPullToSrc (head, base, title) {
+async function createPullToSrc (head, base, title, closeImmediately) {
   const pullInfo = await this.$axios.$post(f(uPull, submissionsSrcRepo), {
     base,
     head,
@@ -69,14 +75,34 @@ async function createPullToSrc (head, base, title) {
   return pullInfo
 }
 
+async function closePull (repo, pullId) {
+  await this.$axios.$patch(`/repos/${repo}/pulls/${pullId}`, {
+    state: 'closed'
+  })
+}
+
+async function getFile (repo, path, ref) {
+  const refQuery = ref !== undefined ? `?ref=${ref}` : ''
+  try {
+    const file = await this.$axios.$get(`/repos/${repo}/contents/${path}${refQuery}`)
+    file.text = Base64.decode(file.content)
+    return file
+  } catch (e) {
+    return undefined
+  }
+}
+
 export default {
   $axios,
   getUserRepo,
   forkRepo,
-  createTempBranch,
-  createFile,
   createPullToSrc,
+  closePull,
   deleteRef,
+  getRef,
+  pushFilesToRef,
   submissionsSrcRepo,
-  baseRepoOwner
+  baseRepoOwner,
+  getFile,
+  getBranchHeadSHA
 }

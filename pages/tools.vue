@@ -28,6 +28,7 @@
 
 <script>
 export default {
+  auth: false,
   data: () => ({
     collapse: [],
     quota: undefined

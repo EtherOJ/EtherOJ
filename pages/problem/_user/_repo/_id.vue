@@ -43,6 +43,7 @@ import Card from '~/components/Card'
 import Loader from '~/components/Loader'
 
 export default {
+  auth: false,
   components: { Card, VueMarkdown, Loader },
   data () {
     return {

@@ -33,6 +33,7 @@
 const PR = '/repos/EtherOJ/submissions/pulls?state=all'
 
 export default {
+  auth: false,
   data () {
     return {
       prList: []

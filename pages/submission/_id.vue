@@ -85,6 +85,7 @@ const CHECK_SUITE = '/repos/EtherOJ/submissions/commits/{0}/check-runs'
 const DETAIL = '/repos/EtherOJ/submissions/check-runs/{0}/annotations'
 
 export default {
+  auth: false,
   components: {
     Card, Loader, CaseTile
   },

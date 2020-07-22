@@ -58,8 +58,8 @@ const placeholderCode = 'int main() \n{\n\n}\n'
 export default {
   data () {
     return {
-      repo: this.$route.params.repo,
-      ref: this.$route.params.ref,
+      repo: null,
+      ref: this.$route.params.pathMatch,
       code: placeholderCode,
       noSubmit: false,
       submitting: false,
@@ -69,9 +69,17 @@ export default {
       defEnt: null
     }
   },
-  mounted () {
-    if (this.$route.params.repo && this.$route.params.ref) {
-      this.onChoiceClick()
+  created () {
+    if (this.$route.params.user) {
+      if (this.$route.params.repo) {
+        this.repo = `${this.$route.params.user}/${this.$route.params.repo}`
+        if (this.$route.params.pathMatch) {
+          this.onChoiceClick()
+        }
+      } else if (this.$route.params.pathMatch) {
+        this.repo = `${this.$route.params.user}/${this.$route.params.pathMatch}`
+        this.ref = null
+      }
     }
   },
   methods: {

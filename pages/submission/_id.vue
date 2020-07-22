@@ -19,10 +19,7 @@
           </a>
         </p>
         <p>
-          <b>Name:</b>
-          <span>
-            {{ resp.title }}
-          </span>
+          <b>Name:</b> {{ resp.title }}
         </p>
         <p>
           <b>Created:</b>

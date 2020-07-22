@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h1>Problems</h1>
+    <LoginPrompt />
     <span>Problem Source: </span>
     <zi-select size="small" value="EtherOJ Central">
       <zi-option value="EtherOJ Central" />

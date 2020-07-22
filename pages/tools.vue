@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h1>Tools</h1>
+    <LoginPrompt />
     <zi-note>
       This page contains useful tools and data you may find useful while
       solving problems with EtherOJ.

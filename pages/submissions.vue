@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h1>Submissions</h1>
+    <LoginPrompt />
     <br>
     <table class="bg-gray-100 rounded-lg w-full">
       <tr class="bg-gray-200">

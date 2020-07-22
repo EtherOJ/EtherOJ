@@ -40,6 +40,7 @@ export default {
     { src: '~/plugins/nuxt-prism', mode: 'client' },
     { src: '~/plugins/vue-modal', mode: 'client' },
     { src: '~/plugins/api-helper' },
+    { src: '~/plugins/global' },
     { src: '~/plugins/zeit', ssr: true }
   ],
   /*

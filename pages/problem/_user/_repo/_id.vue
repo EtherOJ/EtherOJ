@@ -2,6 +2,7 @@
   <div class="container">
     <template v-if="!error">
       <h1>{{ id }} - {{ def.name }}</h1>
+      <LoginPrompt />
       <Card name="ACTIONS">
         <nuxt-link :to="`/submit/${user}/${repo}/heads/${id}`">
           <zi-button size="small">

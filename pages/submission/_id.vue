@@ -2,6 +2,7 @@
   <div class="container">
     <template v-if="!error">
       <h1>Submission #{{ resp.number }}</h1>
+      <LoginPrompt />
       <!-- <zi-note type="warning">
         This submission is not validated for results to be legal.
       </zi-note> -->

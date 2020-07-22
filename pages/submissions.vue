@@ -3,8 +3,8 @@
     <h1>Submissions</h1>
     <LoginPrompt />
     <br>
-    <table class="bg-gray-100 rounded-lg w-full">
-      <tr class="bg-gray-200">
+    <table>
+      <tr>
         <th>
           id
         </th>

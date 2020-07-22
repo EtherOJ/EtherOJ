@@ -3,13 +3,16 @@
     <template v-if="!error">
       <h1>{{ id }} - {{ def.name }}</h1>
       <Card name="ACTIONS">
-        <nuxt-link :to="{ name: 'submit', params: { repo: repo , ref: `heads/${id}` }}">
+        <nuxt-link :to="`/submit/${user}/${repo}/heads/${id}`">
           <zi-button size="small">
             Submit
           </zi-button>
         </nuxt-link>
       </Card>
       <Card name="META">
+        <p>
+          <b>Repository:</b> {{ user }}/{{ repo }}: {{ id }}
+        </p>
         <p v-if="def.source">
           <b>Problem Source:</b> {{ def.source }}
         </p>
@@ -36,19 +39,16 @@
 <script>
 import YAML from 'yaml'
 import VueMarkdown from 'vue-markdown'
-import Base64 from '~/assets/base64'
 import Card from '~/components/Card'
 import Loader from '~/components/Loader'
-
-const DEF_PATH = '/repos/EtherOJ/problems/contents/problem.yml?ref='
-const DEC_PATH = '/repos/EtherOJ/problems/contents/README.md?ref='
 
 export default {
   components: { Card, VueMarkdown, Loader },
   data () {
     return {
       id: this.$route.params.id,
-      repo: 'EtherOJ/problems', // todo
+      user: this.$route.params.user,
+      repo: this.$route.params.repo,
       def: null,
       description: '',
       error: 'Loading...'
@@ -56,10 +56,10 @@ export default {
   },
   async mounted () {
     try {
-      const defInfo = await this.$axios.$get(DEF_PATH + this.id)
-      const decInfo = await this.$axios.$get(DEC_PATH + this.id)
-      this.def = YAML.parse(Base64.decode(defInfo.content))
-      this.description = Base64.decode(decInfo.content)
+      const d = await this.$api.getFile(`${this.user}/${this.repo}`, 'problem.yml', this.id)
+      if (!d) { throw new Error('Problem not found') }
+      this.description = (await this.$api.getFile(`${this.user}/${this.repo}`, 'README.md', this.id)).text
+      this.def = YAML.parse(d.text)
       this.error = false
     } catch (e) {
       this.error = e

@@ -17,7 +17,7 @@
       <tr v-for="d in problems" :key="d.name">
         <td>{{ d.id }}</td>
         <td>
-          <nuxt-link :to="`/problem/${d.id}`">
+          <nuxt-link :to="`/problem/EtherOJ/problems/${d.id}`">
             {{ d.name }}
           </nuxt-link>
         </td>

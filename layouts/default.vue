@@ -1,7 +1,9 @@
 <template>
   <div>
     <AppBar />
-    <nuxt />
+    <div class="page-box">
+      <nuxt />
+    </div>
   </div>
 </template>
 
@@ -38,8 +40,12 @@ html {
   margin: 0;
 }
 
+.page-box {
+  @apply my-0 py-20;
+}
+
 .container {
-  @apply mx-auto my-0 pt-20 min-h-screen;
+  @apply mx-auto min-h-screen;
 }
 
 h1 {

@@ -1,6 +1,9 @@
 <template>
   <div class="container">
     <h1>Submit Code</h1>
+    <zi-note v-if="submitBranch !== 'judge'" class="my-5">
+      Using branch {{ submitBranch }}
+    </zi-note>
     Submit problem
     <zi-input
       v-model.trim="repo"
@@ -64,12 +67,17 @@ export default {
       noSubmit: false,
       submitting: false,
       fixedInput: false,
+      submitBranch: 'judge',
 
       refEnt: null,
       defEnt: null
     }
   },
   created () {
+    if (this.$route.query.branch === 'dev') {
+      this.submitBranch = 'dev'
+    }
+
     if (this.$route.params.user) {
       if (this.$route.params.repo) {
         this.repo = `${this.$route.params.user}/${this.$route.params.repo}`
@@ -183,13 +191,13 @@ export default {
             content: `https://github.com/${this.repo} ${this.ref}`
           }
         ],
-        await this.$api.getBranchHeadSHA(this.$api.submissionsSrcRepo, 'judge'),
+        await this.$api.getBranchHeadSHA(this.$api.submissionsSrcRepo, this.submitBranch),
         `refs/heads/${branchName}`
       )
 
       const pull = await this.$api.createPullToSrc(
         `${repoWork.owner.login}:${branchName}`,
-        'judge',
+        this.submitBranch,
         `Submit ${this.repo}:${this.ref} ${this.defEnt.name}`
       )
 

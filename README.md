@@ -1,6 +1,7 @@
 # [EtherOJ](//oj.akioi.icu)
-<img alt="GitHub" src="https://img.shields.io/github/license/EtherOJ/EtherOJ">
-<img alt="Website" src="https://img.shields.io/website?up_message=online&url=https%3A%2F%2Foj.akioi.icu">
+![GitHub](https://img.shields.io/github/license/EtherOJ/EtherOJ)
+[![Website](https://img.shields.io/website?up_message=online&url=https%3A%2F%2Foj.akioi.icu)](https://oj.akioi.icu)
+[![Telegram](https://img.shields.io/badge/discuss%20on-telegram-blue?logo=telegram&link=https%3A%2F%2Ft.me%2FEtherOJ)](https://t.me/EtherOJ)
 
 [EtherOJ](//oj.akioi.icu) is a open source and free OnlineJudge, entirely based on GitHub.
 

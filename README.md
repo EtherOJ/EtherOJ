@@ -24,7 +24,7 @@ The entire project is hosted on our [EtherOJ Organization](//github.com/EtherOJ)
 
 - **EtherOJ/EtherOJ:** Frontend of EtherOJ
 - **[EtherOJ/EtherJudger](//github.com/EtherOJ/EtherJudger):** GitHub Actions as a problem judger.
-- **[EtherOJ/problems](//github.com/EtherOJ/EtherJudger):** Problem repository example.
+- **[EtherOJ/problems](//github.com/EtherOJ/problems):** Problem repository example.
 - **EtherOJ/submissions:** EtherOJ submissions storage.
 
 ## Contribute

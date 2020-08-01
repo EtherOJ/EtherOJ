@@ -15,7 +15,7 @@ More and more OnlineJudges are disappearing in recent years. As these OJs died, 
 
 - **Open Source:** The entire project is open source  and free for everyone.
 - **Live forever:** The judger, problemset, judge result, users, submissions... everything is stored and based on GitHub, whose stability and data security is trusted by 40 million GitHub users.
-- **Freedom:** Problem description and testcases are open without restriction.
+- **Freedom:** Problem description and testcases are open to everyone to get and modify.
 - **Distributed:** There's no "official" centralized problem repository. You can easily create, share and judge your own problem by simply creating your problem repository. 
 
 ## Project Structure
